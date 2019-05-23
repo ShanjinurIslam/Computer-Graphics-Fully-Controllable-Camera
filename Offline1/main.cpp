@@ -8,8 +8,6 @@
 #define GL_SILENCE_DEPRECATION
 #include <iostream>
 #include <GLUT/GLUT.h>
-#include <OpenGL/glu.h>
-#include <OpenGL/gl.h>
 #include <cmath>
 
 double angle,height ;
@@ -33,29 +31,61 @@ public:
         this->y = p.y ;
         this->z = p.z ;
     }
-    void Print(){
+    void print(){
         printf("(%lf,%lf,%lf)",x,y,z) ;
     }
 } pos,u,l,r ;
 
+void drawAxes(){
+    
+    glBegin(GL_LINES);{
+        glColor3f(1.0, 0, 0);
+        glVertex3f( 100,0,0);
+        glVertex3f(-100,0,0);
+        
+        glColor3f(0, 1.0, 0);
+        glVertex3f(0,-100,0);
+        glVertex3f(0, 100,0);
+        
+        glColor3f(0, 0, 1.0);
+        glVertex3f(0,0, 100);
+        glVertex3f(0,0,-100);
+    }glEnd();
+    
+}
+
 void init(){
-    pos = *new Point(50,50,0) ;
-    u = *new Point(0,0,1) ; //z axis is up vector
-    l = *new Point(-1/(sqrt(2)),1/sqrt(2),0) ;
-    r = *new Point(-1/(sqrt(2)),-1/sqrt(2),0) ;
+    pos = Point(100,100,0) ;
+    u = Point(0,0,1) ; //z axis is up vector
+    l = Point(-1/(sqrt(2)),-1/sqrt(2),0) ;
+    r = Point(-1/(sqrt(2)),1/sqrt(2),0) ;
     angle = acos(-1.0)/4 ;
     height = 80 ;
     glClearColor(0,0,0,0) ;
     glMatrixMode(GL_PROJECTION) ;
     glLoadIdentity() ;
-    gluPerspective(80,1,1,1) ;
+    gluPerspective(80,1,1,1000.0) ;
 }
 
 void display(){
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) ;
+    glClearColor(0,0,0,0) ;
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT) ;
     
+    glMatrixMode(GL_MODELVIEW) ;
+    glLoadIdentity() ;
+    gluLookAt(pos.x,pos.y,pos.z, pos.x + 10*l.x , pos.y + 10*l.y , pos.z + 10*l.z , u.x, u.y, u.z);
+    
+    glMatrixMode(GL_MODELVIEW) ;
+    
+    glPushMatrix();
+    drawAxes() ;
+    glPopMatrix();
+    
+    glutSwapBuffers() ;
 }
 void animate(){
-    
+    glutPostRedisplay() ;
 }
 void keyboardListener(unsigned char key,int x,int y){
     
