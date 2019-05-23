@@ -37,7 +37,7 @@ public:
 } pos,u,l,r ;
 
 void drawAxes(){
-    
+    glPushMatrix();
     glBegin(GL_LINES);{
         glColor3f(1.0, 0, 0);
         glVertex3f( 100,0,0);
@@ -51,7 +51,7 @@ void drawAxes(){
         glVertex3f(0,0, 100);
         glVertex3f(0,0,-100);
     }glEnd();
-    
+    glPopMatrix() ;
 }
 
 void init(){

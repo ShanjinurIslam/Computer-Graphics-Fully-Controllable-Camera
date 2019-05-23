@@ -25,7 +25,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		2205B77A22970CF20096E09F /* Offline1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Offline1; sourceTree = BUILT_PRODUCTS_DIR; };
+		2205B77A22970CF20096E09F /* FullyControllableCamera */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FullyControllableCamera; sourceTree = BUILT_PRODUCTS_DIR; };
 		2205B77D22970CF20096E09F /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		2205B78522970CFF0096E09F /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
 		2205B78722970D0C0096E09F /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
@@ -56,7 +56,7 @@
 		2205B77B22970CF20096E09F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2205B77A22970CF20096E09F /* Offline1 */,
+				2205B77A22970CF20096E09F /* FullyControllableCamera */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -81,9 +81,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2205B77922970CF20096E09F /* Offline1 */ = {
+		2205B77922970CF20096E09F /* FullyControllableCamera */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2205B78122970CF20096E09F /* Build configuration list for PBXNativeTarget "Offline1" */;
+			buildConfigurationList = 2205B78122970CF20096E09F /* Build configuration list for PBXNativeTarget "FullyControllableCamera" */;
 			buildPhases = (
 				2205B77622970CF20096E09F /* Sources */,
 				2205B77722970CF20096E09F /* Frameworks */,
@@ -93,9 +93,9 @@
 			);
 			dependencies = (
 			);
-			name = Offline1;
+			name = FullyControllableCamera;
 			productName = Offline1;
-			productReference = 2205B77A22970CF20096E09F /* Offline1 */;
+			productReference = 2205B77A22970CF20096E09F /* FullyControllableCamera */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -112,7 +112,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2205B77522970CF20096E09F /* Build configuration list for PBXProject "Offline1" */;
+			buildConfigurationList = 2205B77522970CF20096E09F /* Build configuration list for PBXProject "FullyControllableCamera" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -124,7 +124,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2205B77922970CF20096E09F /* Offline1 */,
+				2205B77922970CF20096E09F /* FullyControllableCamera */,
 			);
 		};
 /* End PBXProject section */
@@ -273,7 +273,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2205B77522970CF20096E09F /* Build configuration list for PBXProject "Offline1" */ = {
+		2205B77522970CF20096E09F /* Build configuration list for PBXProject "FullyControllableCamera" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2205B77F22970CF20096E09F /* Debug */,
@@ -282,7 +282,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2205B78122970CF20096E09F /* Build configuration list for PBXNativeTarget "Offline1" */ = {
+		2205B78122970CF20096E09F /* Build configuration list for PBXNativeTarget "FullyControllableCamera" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2205B78222970CF20096E09F /* Debug */,
