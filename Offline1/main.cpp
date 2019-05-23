@@ -10,6 +10,25 @@
 #include <GLUT/GLUT.h>
 #include <OpenGL/glu.h>
 #include <OpenGL/gl.h>
+#include <cmath>
+
+class Point{
+public:
+    double x,y,z ;
+    Point(double x,double y,double z){
+        this->x = x ;
+        this->y = y ;
+        this->z = z ;
+    }
+    Point(const Point &p){
+        this->x = p.x ;
+        this->y = p.y ;
+        this->z = p.z ;
+    }
+    void Print(){
+        printf("(%lf,%lf,%lf)",x,y,z) ;
+    }
+};
 
 void init(){
     
