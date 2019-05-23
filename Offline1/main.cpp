@@ -10,7 +10,7 @@
 #include <GLUT/GLUT.h>
 #include <cmath>
 
-double angle,height ;
+double angle,height,increment ;
 
 class Point{
 public:
@@ -39,17 +39,17 @@ public:
 void drawAxes(){
     glPushMatrix();
     glBegin(GL_LINES);{
-        glColor3f(1.0, 0, 0);
-        glVertex3f( 100,0,0);
-        glVertex3f(-100,0,0);
+    glColor3f(1.0, 0, 0);
+    glVertex3f( 100,0,0);
+    glVertex3f(-100,0,0);
         
-        glColor3f(0, 1.0, 0);
-        glVertex3f(0,-100,0);
-        glVertex3f(0, 100,0);
+    glColor3f(0, 1.0, 0);
+    glVertex3f(0,-100,0);
+    glVertex3f(0, 100,0);
         
-        glColor3f(0, 0, 1.0);
-        glVertex3f(0,0, 100);
-        glVertex3f(0,0,-100);
+    glColor3f(0, 0, 1.0);
+    glVertex3f(0,0, 100);
+    glVertex3f(0,0,-100);
     }glEnd();
     glPopMatrix() ;
 }
@@ -61,6 +61,7 @@ void init(){
     r = Point(-1/(sqrt(2)),1/sqrt(2),0) ;
     angle = acos(-1.0)/4 ;
     height = 80 ;
+    increment = 5 ;
     glClearColor(0,0,0,0) ;
     glMatrixMode(GL_PROJECTION) ;
     glLoadIdentity() ;
@@ -91,7 +92,21 @@ void keyboardListener(unsigned char key,int x,int y){
     
 }
 void specialKeyListener(int key,int x,int y){
-    
+    switch (key) {
+        case GLUT_KEY_UP:
+            pos.x += l.x + increment ;
+            pos.y += l.y + increment ;
+            pos.z += l.z + increment ;
+            break;
+        case GLUT_KEY_DOWN:
+            pos.x -= l.x + increment ;
+            pos.y -= l.y + increment ;
+            pos.z -= l.z + increment ;
+            break;
+            
+        default:
+            break;
+    }
 }
 
 
