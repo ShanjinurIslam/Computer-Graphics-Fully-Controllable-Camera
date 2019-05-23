@@ -12,9 +12,17 @@
 #include <OpenGL/gl.h>
 #include <cmath>
 
+double angle,height ;
+
 class Point{
 public:
     double x,y,z ;
+    
+    Point(){
+        x = 0 ;
+        y = 0 ;
+        z = 0 ;
+    }
     Point(double x,double y,double z){
         this->x = x ;
         this->y = y ;
@@ -28,11 +36,21 @@ public:
     void Print(){
         printf("(%lf,%lf,%lf)",x,y,z) ;
     }
-};
+} pos,u,l,r ;
 
 void init(){
-    
+    pos = *new Point(50,50,0) ;
+    u = *new Point(0,0,1) ; //z axis is up vector
+    l = *new Point(-1/(sqrt(2)),1/sqrt(2),0) ;
+    r = *new Point(-1/(sqrt(2)),-1/sqrt(2),0) ;
+    angle = acos(-1.0)/4 ;
+    height = 80 ;
+    glClearColor(0,0,0,0) ;
+    glMatrixMode(GL_PROJECTION) ;
+    glLoadIdentity() ;
+    gluPerspective(80,1,1,1) ;
 }
+
 void display(){
     
 }
