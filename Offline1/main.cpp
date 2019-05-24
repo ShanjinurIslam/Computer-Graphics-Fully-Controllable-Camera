@@ -69,7 +69,7 @@ void init(){
     u = Point(0,0,1) ; //z axis is up vector
     l = Point(-1/(sqrt(2)),-1/sqrt(2),0) ;
     r = Point(-1/(sqrt(2)),1/sqrt(2),0) ;
-    angle = acos(-1.0)/6 ;
+    angle = acos(-1.0)/30 ; //3 degree angle change
     height = 80 ;
     increment = 5 ;
     glClearColor(0,0,0,0) ;
@@ -99,20 +99,54 @@ void animate(){
     glutPostRedisplay() ;
 }
 void keyboardListener(unsigned char key,int x,int y){
+    
+    /*
+    U
+    |
+    |
+    |
+    L ______ R
+     
+    1. Rotating will not change the UP vector but will change the LOOK Vector and RIGHT Vector.
+    2. Looking up/down not change the RIGHT vector but will change the LOOK Vector and RIGHT Vector.
+    3. Tilt not change the LOOK vector but will change the UP Vector and RIGHT Vector.
+    */
     switch (key) {
         case '1':
             r.x = r.x*cos(-1.0*angle) + l.x*sin(-1.0*angle) ;
             r.y = r.y*cos(-1.0*angle) + l.y*sin(-1.0*angle) ;
             r.z = r.z*cos(-1.0*angle) + l.z*sin(-1.0*angle) ;
             l = generateCrossProduct(u,r) ;
-            
             break;
         case '2':
             r.x = r.x*cos(angle) + l.x*sin(angle) ;
             r.y = r.y*cos(angle) + l.y*sin(angle) ;
             r.z = r.z*cos(angle) + l.z*sin(angle) ;
             l = generateCrossProduct(u,r) ;
-            
+            break;
+        case '3':
+            l.x = l.x*cos(angle) + u.x*sin(angle) ;
+            l.y = l.y*cos(angle) + u.y*sin(angle) ;
+            l.z = l.z*cos(angle) + u.z*sin(angle) ;
+            u = generateCrossProduct(r,l) ;
+            break;
+        case '4':
+            l.x = l.x*cos(-1.0*angle) + u.x*sin(-1.0*angle) ;
+            l.y = l.y*cos(-1.0*angle) + u.y*sin(-1.0*angle) ;
+            l.z = l.z*cos(-1.0*angle) + u.z*sin(-1.0*angle) ;
+            u = generateCrossProduct(r,l) ;
+            break;
+        case '5':
+            u.x = u.x*cos(angle) + r.x*sin(angle) ;
+            u.y = u.y*cos(angle) + r.y*sin(angle) ;
+            u.z = u.z*cos(angle) + r.z*sin(angle) ;
+            r = generateCrossProduct(l,u) ;
+            break;
+        case '6':
+            u.x = u.x*cos(-1.0*angle) + r.x*sin(-1.0*angle) ;
+            u.y = u.y*cos(-1.0*angle) + r.y*sin(-1.0*angle) ;
+            u.z = u.z*cos(-1.0*angle) + r.z*sin(-1.0*angle) ;
+            r = generateCrossProduct(l,u) ;
             break;
             
         default:
