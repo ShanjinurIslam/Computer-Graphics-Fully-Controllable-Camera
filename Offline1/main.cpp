@@ -32,9 +32,19 @@ public:
         this->z = p.z ;
     }
     void print(){
-        printf("(%lf,%lf,%lf)",x,y,z) ;
+        printf("(%lf,%lf,%lf)\n\n",x,y,z) ;
     }
 } pos,u,l,r ;
+
+
+Point generateCrossProduct(Point a, Point b){
+    Point p ;
+    p.x = a.y*b.z - a.z*b.y ;
+    p.y = a.z*b.x - a.x*b.z ;
+    p.z = a.x*b.y - a.y*b.x ;
+    
+    return p ;
+}
 
 void drawAxes(){
     glPushMatrix();
@@ -59,7 +69,7 @@ void init(){
     u = Point(0,0,1) ; //z axis is up vector
     l = Point(-1/(sqrt(2)),-1/sqrt(2),0) ;
     r = Point(-1/(sqrt(2)),1/sqrt(2),0) ;
-    angle = acos(-1.0)/4 ;
+    angle = acos(-1.0)/6 ;
     height = 80 ;
     increment = 5 ;
     glClearColor(0,0,0,0) ;
@@ -75,7 +85,7 @@ void display(){
     
     glMatrixMode(GL_MODELVIEW) ;
     glLoadIdentity() ;
-    gluLookAt(pos.x,pos.y,pos.z, pos.x + 10*l.x , pos.y + 10*l.y , pos.z + 10*l.z , u.x, u.y, u.z);
+    gluLookAt(pos.x,pos.y,pos.z, pos.x + l.x , pos.y + l.y , pos.z + l.z , u.x, u.y, u.z);
     
     glMatrixMode(GL_MODELVIEW) ;
     
@@ -89,19 +99,59 @@ void animate(){
     glutPostRedisplay() ;
 }
 void keyboardListener(unsigned char key,int x,int y){
-    
+    switch (key) {
+        case '1':
+            r.x = r.x*cos(-1.0*angle) + l.x*sin(-1.0*angle) ;
+            r.y = r.y*cos(-1.0*angle) + l.y*sin(-1.0*angle) ;
+            r.z = r.z*cos(-1.0*angle) + l.z*sin(-1.0*angle) ;
+            l = generateCrossProduct(u,r) ;
+            
+            break;
+        case '2':
+            r.x = r.x*cos(angle) + l.x*sin(angle) ;
+            r.y = r.y*cos(angle) + l.y*sin(angle) ;
+            r.z = r.z*cos(angle) + l.z*sin(angle) ;
+            l = generateCrossProduct(u,r) ;
+            
+            break;
+            
+        default:
+            break;
+    }
 }
 void specialKeyListener(int key,int x,int y){
     switch (key) {
         case GLUT_KEY_UP:
-            pos.x += l.x + increment ;
-            pos.y += l.y + increment ;
-            pos.z += l.z + increment ;
+            pos.x += l.x * increment ; //as l.x is negative incrementing value linearly will change position of eye
+            pos.y += l.y * increment ; //as l.x is negative incrementing value linearly will change position of eye
+            pos.z += l.z * increment ;
             break;
         case GLUT_KEY_DOWN:
-            pos.x -= l.x + increment ;
-            pos.y -= l.y + increment ;
-            pos.z -= l.z + increment ;
+            pos.x -= l.x * increment ;
+            pos.y -= l.y * increment ;
+            pos.z -= l.z * increment ;
+            break;
+        
+        case GLUT_KEY_LEFT:
+            pos.x -= r.x * increment ; //as right vector is perpendicular to up vector linear shifting with negative incrementing value linearly will change position of eye left side
+            pos.y -= r.y * increment ;
+            pos.z -= r.z * increment ;
+            break;
+        case GLUT_KEY_RIGHT:
+            pos.x += r.x * increment ; //as right vector is perpendicular to up vector linear shifting with positive incrementing value linearly will change position of eye right side
+            pos.y += r.y * increment ;
+            pos.z += r.z * increment ;
+            break;
+            
+        case GLUT_KEY_PAGE_UP:
+            pos.x += u.x * increment ;
+            pos.y += u.y * increment ;
+            pos.z += u.z * increment ; // shifting of position of eye on in z axis
+            break;
+        case GLUT_KEY_PAGE_DOWN:
+            pos.x -= u.x * increment ;
+            pos.y -= u.y * increment ;
+            pos.z -= u.z * increment ; // shifting of position of eye on in z axis
             break;
             
         default:
